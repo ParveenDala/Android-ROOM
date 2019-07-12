@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Android-ROOM</string>
+    <string name="note_body">Note body</string>
+    <string name="note_title">Note title</string>
+    <string name="add_note">Add Note</string>
+    <string name="note_date">2019-02-01</string>
+    <string name="note_body_2">This is a dummy note...</string>
+</resources>
