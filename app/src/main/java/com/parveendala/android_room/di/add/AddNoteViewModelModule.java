@@ -16,7 +16,7 @@ import dagger.multibindings.IntoMap;
 @Module
 public abstract class AddNoteViewModelModule {
 
-
+    @AddScope
     @Binds
     @IntoMap
     @ViewModelKey(AddNoteViewModel.class)

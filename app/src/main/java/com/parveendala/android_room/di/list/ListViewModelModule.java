@@ -16,10 +16,9 @@ import dagger.multibindings.IntoMap;
 @Module
 public abstract class ListViewModelModule {
 
+    @ListScope
     @Binds
     @IntoMap
     @ViewModelKey(ListViewModel.class)
     abstract ViewModel listViewModel(ListViewModel listViewModel);
-
-
 }

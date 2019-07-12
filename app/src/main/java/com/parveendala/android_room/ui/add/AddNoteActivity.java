@@ -4,10 +4,16 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.parveendala.android_room.R;
+import com.parveendala.android_room.models.Note;
+import com.parveendala.android_room.viewmodel.ViewModelProviderFactory;
+
+import java.util.Calendar;
+
+import javax.inject.Inject;
 
 import dagger.android.support.DaggerAppCompatActivity;
 
@@ -19,6 +25,10 @@ public class AddNoteActivity extends DaggerAppCompatActivity {
 
     private TextInputEditText etTitle, etBody;
 
+    @Inject
+    ViewModelProviderFactory viewModelProviderFactory;
+    private AddNoteViewModel addNoteViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +37,7 @@ public class AddNoteActivity extends DaggerAppCompatActivity {
         etTitle = findViewById(R.id.title);
         etBody = findViewById(R.id.body);
 
+        addNoteViewModel = ViewModelProviders.of(this, viewModelProviderFactory).get(AddNoteViewModel.class);
     }
 
     public void onAddNoteClicked(View view) {
@@ -40,5 +51,10 @@ public class AddNoteActivity extends DaggerAppCompatActivity {
             return;
         }
 
+        Note note = new Note(etTitle.getText().toString().trim(), etBody.getText().toString().trim(), String.valueOf(Calendar.getInstance().getTime()));
+
+        addNoteViewModel.insertNote(note);
+
+        finish();
     }
 }
